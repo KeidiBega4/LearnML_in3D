@@ -49,9 +49,9 @@ def my_backward(x, y_target, w, cache):
 
 def gradient_check():
     rng = np.random.default_rng(0)
-    w = nn_mod.init_weights(seed=0)
-    x = rng.normal(size=(8, N_FEATURES)).astype(np.float32)
-    y = rng.uniform(-1, 1, size=(8, N_ACTIONS)).astype(np.float32)
+    w = {k: v.astype(np.float64) for k, v in nn_mod.init_weights(seed=0).items()}
+    x = rng.normal(size=(8, N_FEATURES))
+    y = rng.uniform(-1, 1, size=(8, N_ACTIONS))
     cache = nn_mod.forward_all(x, w)
     grads = my_backward(x, y, w, cache)
 
