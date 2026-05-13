@@ -26,35 +26,24 @@ from drive2win.normalize import (
 )
 
 
-# =========================================================================
-# TODO — write backward()
-# =========================================================================
-# Walk the chain rule outward from the loss:
-#   y = tanh(z3),  loss = MSE(y, target)
-#   z3 = a2 W3 + b3,   a2 = ReLU(z2)
-#   z2 = a1 W2 + b2,   a1 = ReLU(z1)
-#   z1 = x  W1 + b1
-#
-# Replace each `...` with the correct expression.
-# =========================================================================
 def my_backward(x, y_target, w, cache):
     n = x.shape[0]
     y = cache["y"]
     # --- output ---
-    dy  = ...   # 2 * (y - y_target) / (n * y.shape[1])
-    dz3 = ...   # tanh derivative: dy * (1 - y * y)
-    dW3 = ...   # cache["a2"].T @ dz3
-    db3 = ...   # dz3.sum(axis=0)
+    dy  = 2 * (y - y_target) / (n * y.shape[1])
+    dz3 = dy * (1 - y * y)
+    dW3 = cache["a2"].T @ dz3
+    db3 = dz3.sum(axis=0)
     # --- hidden 2 ---
-    da2 = ...   # dz3 @ w["W3"].T
-    dz2 = ...   # ReLU mask: da2 * (cache["z2"] > 0)
-    dW2 = ...   # cache["a1"].T @ dz2
-    db2 = ...
+    da2 = dz3 @ w["W3"].T
+    dz2 = da2 * (cache["z2"] > 0)
+    dW2 = cache["a1"].T @ dz2
+    db2 = dz2.sum(axis=0)
     # --- hidden 1 ---
-    da1 = ...
-    dz1 = ...
-    dW1 = ...   # x.T @ dz1
-    db1 = ...
+    da1 = dz2 @ w["W2"].T
+    dz1 = da1 * (cache["z1"] > 0)
+    dW1 = x.T @ dz1
+    db1 = dz1.sum(axis=0)
     return {"W1": dW1, "b1": db1, "W2": dW2, "b2": db2, "W3": dW3, "b3": db3}
 
 
