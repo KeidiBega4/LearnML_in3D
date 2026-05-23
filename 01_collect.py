@@ -67,7 +67,7 @@ def main():
     input("Press Enter once the browser tab has focus and you can see the bot. ")
 
     client.connect_ws()
-    client.configure(obstacles_enabled = True)
+    client.configure(obstacles_enabled = False)
     time.sleep(0.5)
 
     positions: list = []
