@@ -88,7 +88,7 @@ def run_benchmark(weights: str, runs: int = DEFAULT_RUNS, seed: int = DEFAULT_SE
             )
             client.connect_ws()
             try:
-                client.configure(obstacles_enabled=False)
+                client.configure(obstacles_enabled=True)
             except Exception as e:
                 print(f"  [warn] configure failed ({e}), continuing with server defaults")
             time.sleep(0.6)

@@ -66,7 +66,7 @@ def sensors_to_input(sensors: dict) -> np.ndarray:
             sensors["speed"],
             sensors["heading_error"],
             sensors["checkpoint_distance"],
-            *sensors["rays"],
+            *sensors["rays"][:8],
             sensors["ground_friction"],
         ],
         dtype=np.float32,
