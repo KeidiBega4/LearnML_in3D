@@ -1,0 +1,14 @@
+[
+  {
+    "iteration": 1,
+    "summary": {
+      "n_runs": 3,
+      "completion_rate": 0.0,
+      "median_lap_time": Infinity,
+      "mean_crashes": 1.0,
+      "max_checkpoints": 1
+    },
+    "n_steps": 6970,
+    "retrained": true
+  }
+]
