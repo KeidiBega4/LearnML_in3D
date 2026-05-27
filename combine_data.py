@@ -39,8 +39,8 @@ def main():
                     help="Append a left-right mirrored copy of every sample")
     args = ap.parse_args()
 
-    if len(args.inputs) < 2:
-        ap.error("Provide at least two input files.")
+    if len(args.inputs) < 2 and not args.mirror:
+        ap.error("Provide at least two input files (or one file with --mirror).")
 
     state_frames, action_frames = [], []
     FEATURE_NAMES = [
