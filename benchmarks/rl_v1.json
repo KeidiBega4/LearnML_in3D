@@ -1,0 +1,26 @@
+[
+  {
+    "iteration": 1,
+    "summary": {
+      "n_runs": 5,
+      "completion_rate": 0.0,
+      "median_lap_time": Infinity,
+      "mean_crashes": 1.6,
+      "max_checkpoints": 3
+    },
+    "n_steps": 5799,
+    "retrained": true
+  },
+  {
+    "iteration": 2,
+    "summary": {
+      "n_runs": 5,
+      "completion_rate": 0.0,
+      "median_lap_time": Infinity,
+      "mean_crashes": 1.2,
+      "max_checkpoints": 2
+    },
+    "n_steps": 5684,
+    "retrained": true
+  }
+]
