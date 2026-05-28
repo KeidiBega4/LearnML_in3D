@@ -16,9 +16,10 @@ import numpy as np
 from . import nn as nn_mod
 from .normalize import sensors_to_input, clip_action
 
-OSCILLATION_WINDOW  = 80    # frames to look back (4 s at 20 Hz)
-OSCILLATION_DIST    = 3.0   # m — if net displacement less than this = oscillating
+OSCILLATION_WINDOW  = 140   # frames to look back (7 s at 20 Hz)
+OSCILLATION_DIST    = 1.5   # m — net displacement must be less than this = oscillating
 OSCILLATION_SAMPLE  = 20    # record position every N frames
+OSCILLATION_MIN_PTS = 6     # minimum history points before triggering
 
 WALL_DIST         = 2.0   # m — front ray below this = wall
 WALL_SPEED        = 1.0   # m/s — must also be slow to count as wall hit
@@ -66,7 +67,7 @@ def make_policy(weights_path: str):
 
         # Oscillation check — robot moving but not going anywhere
         oscillating = False
-        if len(pos_history) >= 4 and not wall_hit:
+        if len(pos_history) >= OSCILLATION_MIN_PTS and not wall_hit:
             xs = [p[0] for p in pos_history]
             zs = [p[1] for p in pos_history]
             net = np.sqrt((xs[-1]-xs[0])**2 + (zs[-1]-zs[0])**2)
